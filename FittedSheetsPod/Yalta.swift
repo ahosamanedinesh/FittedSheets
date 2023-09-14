@@ -58,7 +58,6 @@ extension LayoutProxy where Base: LayoutItem {
 extension LayoutProxy where Base: UIView {
     var margins: LayoutProxy<UILayoutGuide> { return base.layoutMarginsGuide.al }
     
-    @available(iOS 11.0, tvOS 11.0, *)
     var safeArea: LayoutProxy<UILayoutGuide> { return base.safeAreaLayoutGuide.al }
 }
 
@@ -404,14 +403,12 @@ internal extension UIEdgeInsets {
 // MARK: - Deprecated
 
 extension Anchor where Type: AnchorType.Alignment {
-    @available(*, deprecated, message: "Please use operators instead, e.g. `view.top.align(with: view.bottom * 2 + 10)`.")
     @discardableResult func align<Type: AnchorType.Alignment>(with anchor: Anchor<Type, Axis>, offset: CGFloat = 0, multiplier: CGFloat = 1, relation: NSLayoutConstraint.Relation = .equal) -> NSLayoutConstraint {
         return Constraints.constrain(self, anchor, offset: offset, multiplier: multiplier, relation: relation)
     }
 }
 
 extension Anchor where Type: AnchorType.Dimension {
-    @available(*, deprecated, message: "Please use operators instead, e.g. `view.width.match(view.height * 2 + 10)`.")
     @discardableResult func match<Axis>(_ anchor: Anchor<AnchorType.Dimension, Axis>, offset: CGFloat = 0, multiplier: CGFloat = 1, relation: NSLayoutConstraint.Relation = .equal) -> NSLayoutConstraint {
         return Constraints.constrain(self, anchor, offset: offset, multiplier: multiplier, relation: relation)
     }
